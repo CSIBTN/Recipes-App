@@ -3,4 +3,5 @@
     <string name="app_logo_desc">app logo</string>
     <string name="search_bar_placeholder">Enter ingredients...</string>
     <string name="recipe_image_desc">Recipe image</string>
+    <string name="bookmark_recipe_icon_desc">bookmark recipe</string>
 </resources>

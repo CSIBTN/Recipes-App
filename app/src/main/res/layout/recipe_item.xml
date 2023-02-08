@@ -9,19 +9,30 @@
         android:id="@+id/recipePreviewIV"
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:contentDescription="@string/recipe_image_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/recipe_image_desc" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recipeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBookmark" />
+
+    <ImageView
+        android:id="@+id/ivBookmark"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="4dp"
+        android:contentDescription="@string/bookmark_recipe_icon_desc"
+        android:src="@drawable/ic_bookmark"
+        app:layout_constraintEnd_toEndOf="@+id/recipeName"
         app:layout_constraintTop_toBottomOf="@id/recipePreviewIV" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.csibtn.recipehub.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.csibtn.recipehub.R
 import com.csibtn.recipehub.data.RecipePreview
 import com.csibtn.recipehub.databinding.RecipeItemBinding
 
@@ -18,6 +20,10 @@ class RecipeBrowserAdapter(
         fun bind(recipePreview: RecipePreview) {
             recipeBinding.recipeName.text = recipePreview.name
             Glide.with(context).load(recipePreview.imageURL).into(recipeBinding.recipePreviewIV)
+            recipeBinding.ivBookmark.setOnClickListener {
+                Log.d("Icon","Clicked!")
+                recipeBinding.ivBookmark.setImageResource(R.drawable.ic_bookmark_clicked)
+            }
         }
     }
 
