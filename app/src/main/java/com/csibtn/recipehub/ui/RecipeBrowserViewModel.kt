@@ -2,6 +2,7 @@ package com.csibtn.recipehub.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.csibtn.recipehub.data.Recipe
 import com.csibtn.recipehub.data.RecipePreview
 import com.csibtn.recipehub.data.RemoteRecipeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,4 +21,5 @@ class RecipeBrowserViewModel : ViewModel() {
             _recipes.value = recipeBrowserRepository.getRecipesWithTitle("Apple")
         }
     }
+    suspend fun  getRecipeById(id : Int) : Recipe = recipeBrowserRepository.getRecipeById(id)
 }

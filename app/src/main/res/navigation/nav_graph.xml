@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/recipeBrowserFragment"
         android:name="com.csibtn.recipehub.ui.RecipeBrowserFragment"
-        android:label="RecipeBrowserFragment" />
+        android:label="RecipeBrowserFragment" >
+        <action
+            android:id="@+id/showRecipeDetails"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.csibtn.recipehub.ui.RecipeDetailsFragment"
+        android:label="RecipeDetailsFragment" >
+        <argument
+            android:name="recipe"
+            app:argType="com.csibtn.recipehub.data.Recipe" />
+    </fragment>
 </navigation>

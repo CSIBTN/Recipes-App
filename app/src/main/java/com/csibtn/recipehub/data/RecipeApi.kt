@@ -12,6 +12,6 @@ interface RecipeApi {
     )
     suspend fun fetchRecipes(@Query("query") value: String): RecipeResponse
 
-    @GET("recipes/recipes/{id}/information")
+    @GET("recipes/{id}/information?apiKey=${api_key}")
     suspend fun fetchRecipeById(@Path("id") id : Int) : Recipe
 }

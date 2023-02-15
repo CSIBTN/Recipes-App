@@ -1,7 +1,6 @@
 package com.csibtn.recipehub.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.csibtn.recipehub.databinding.FragmentRecipeBrowserBinding
 import kotlinx.coroutines.launch
@@ -38,8 +38,19 @@ class RecipeBrowserFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 recipeViewModel.recipes.collect { recipes ->
-                    Log.d("Recipes","Recipes : $recipes")
-                    recipeBrowserBinding.recipeRecycler.adapter = RecipeBrowserAdapter(recipes,requireContext())
+                    recipeBrowserBinding.recipeRecycler.adapter =
+                        RecipeBrowserAdapter(recipes, requireContext()) { recipeId ->
+                            viewLifecycleOwner.lifecycleScope.launch {
+                                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                                    val recipe = recipeViewModel.getRecipeById(recipeId)
+                                    findNavController().navigate(
+                                        RecipeBrowserFragmentDirections.showRecipeDetails(
+                                            recipe
+                                        )
+                                    )
+                                }
+                            }
+                        }
                 }
             }
         }
