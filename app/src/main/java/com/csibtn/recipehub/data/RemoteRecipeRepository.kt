@@ -15,5 +15,9 @@ object RemoteRecipeRepository {
             .build()
         recipeApi = retrofit.create()
     }
-    suspend fun getRecipesWithTitle(title : String) : List<RecipePreview> = recipeApi.fetchRecipes(title).recipePreviews
+
+    suspend fun getRecipesWithTitle(title: String): List<RecipePreview> =
+        recipeApi.fetchRecipes(title).recipePreviews
+
+    suspend fun getRecipeById(id: Int): Recipe = recipeApi.fetchRecipeById(id)
 }
