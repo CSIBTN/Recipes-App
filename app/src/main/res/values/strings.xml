@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">RecipeHub</string>
     <string name="app_logo_desc">app logo</string>
-    <string name="search_bar_placeholder">Enter ingredients...</string>
+    <string name="search_bar_placeholder">Enter ingredients…</string>
     <string name="recipe_image_desc">Recipe image</string>
     <string name="bookmark_recipe_icon_desc">bookmark recipe</string>
+    <string name="recipe_desc">recipe</string>
+    <string name="likes_desc">number of likes</string>
+    <string name="health_score_desc">healthiness score</string>
+    <string name="time_to_prepare_desc">time to prepare</string>
 </resources>
