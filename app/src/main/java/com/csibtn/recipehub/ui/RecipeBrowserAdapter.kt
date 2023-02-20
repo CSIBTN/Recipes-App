@@ -14,6 +14,7 @@ class RecipeBrowserAdapter(
     private val recipePreviewList: List<RecipePreview>,
     private val context: Context,
     private val onClickCallback: (id : Int) -> Unit,
+    private val onSaveCallback: (id: Int) -> Unit,
 ) :
     RecyclerView.Adapter<RecipeBrowserAdapter.RecipeHolder>() {
     inner class RecipeHolder(
@@ -29,6 +30,9 @@ class RecipeBrowserAdapter(
             }
             recipeBinding.root.setOnClickListener {
                 onClickCallback(recipePreview.recipeId)
+            }
+            recipeBinding.ivBookmark.setOnClickListener{
+                onSaveCallback(recipePreview.recipeId)
             }
         }
     }

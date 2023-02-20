@@ -3,7 +3,6 @@ package com.csibtn.recipehub.data
 import androidx.room.Room
 import com.csibtn.recipehub.util.Constants
 import com.csibtn.recipehub.util.RecipeApplication
-import kotlinx.coroutines.flow.Flow
 
 object RecipeDatabaseRepository {
     private val recipeDatabase: RecipeDatabase =
@@ -13,5 +12,6 @@ object RecipeDatabaseRepository {
             Constants.databaseName
         ).build()
 
-    fun getBookmarkedRecipes() : Flow<List<Recipe>>  = recipeDatabase.recipeDao().getRecipes()
+    suspend fun getBookmarkedRecipes(): List<Recipe> = recipeDatabase.recipeDao().getRecipes()
+    suspend fun addRecipe(recipe: Recipe) = recipeDatabase.recipeDao().insertRecipe(recipe)
 }

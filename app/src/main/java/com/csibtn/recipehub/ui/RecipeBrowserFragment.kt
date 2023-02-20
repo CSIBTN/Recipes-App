@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.csibtn.recipehub.data.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentRecipeBrowserBinding
 import kotlinx.coroutines.launch
 
@@ -39,19 +40,30 @@ class RecipeBrowserFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 recipeViewModel.recipes.collect { recipes ->
                     recipeBrowserBinding.recipeRecycler.adapter =
-                        RecipeBrowserAdapter(recipes, requireContext()) { recipeId ->
-                            viewLifecycleOwner.lifecycleScope.launch {
-                                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                                    val recipe = recipeViewModel.getRecipeById(recipeId)
-                                    findNavController().navigate(
-                                        RecipeBrowserFragmentDirections.showRecipeDetails(
-                                            recipe
-                                        )
-                                    )
-                                }
-                            }
-                        }
+                        RecipeBrowserAdapter(recipes, requireContext(), showDetails(), saveRecipe())
                 }
+            }
+        }
+    }
+
+    private fun showDetails(): (id: Int) -> Unit = { recipeId ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val recipe = recipeViewModel.getRecipeById(recipeId)
+                findNavController().navigate(
+                    RecipeBrowserFragmentDirections.showRecipeDetails(
+                        recipe
+                    )
+                )
+            }
+        }
+    }
+
+    private fun saveRecipe(): (id: Int) -> Unit = { recipeId ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val recipe = recipeViewModel.getRecipeById(recipeId)
+                RecipeDatabaseRepository.addRecipe(recipe)
             }
         }
     }

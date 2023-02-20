@@ -6,4 +6,6 @@
     <item
         android:icon="@drawable/ic_search"
         android:title="Search" />
+    <item android:icon="@drawable/ic_bookmark"
+        android:title="Saved"/>
 </menu>
