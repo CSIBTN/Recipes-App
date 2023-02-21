@@ -12,6 +12,7 @@ object RecipeDatabaseRepository {
             Constants.databaseName
         ).build()
 
+    suspend fun getRecipeById(id: Int) = recipeDatabase.recipeDao().getRecipesById(id)
     suspend fun getBookmarkedRecipes(): List<Recipe> = recipeDatabase.recipeDao().getRecipes()
     suspend fun addRecipe(recipe: Recipe) = recipeDatabase.recipeDao().insertRecipe(recipe)
 }

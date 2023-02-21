@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class RecipeBrowserViewModel : ViewModel() {
+open class RecipeBrowserViewModel : ViewModel() {
     private val recipeBrowserRepository = RemoteRecipeRepository
     private val _recipes: MutableStateFlow<List<RecipePreview>> = MutableStateFlow(emptyList())
     val recipes: StateFlow<List<RecipePreview>>
@@ -19,11 +19,11 @@ class RecipeBrowserViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _recipes.value = getRecipesWithTitle("")
+            _recipes.value = getRecipesWithTitle("Strawberry")
         }
     }
 
-    suspend fun getRecipeById(id: Int): Recipe = recipeBrowserRepository.getRecipeById(id)
+   open suspend fun getRecipeById(id: Int): Recipe = recipeBrowserRepository.getRecipeById(id)
 
     private suspend fun getRecipesWithTitle(title: String): List<RecipePreview> {
         return if (title.isNotEmpty()) {
@@ -31,17 +31,6 @@ class RecipeBrowserViewModel : ViewModel() {
         } else {
             RecipeDatabaseRepository.getBookmarkedRecipes()
                 .map { recipe -> RecipePreview(recipe.recipeID, recipe.name, recipe.sourceUrl) }
-        }
-    }
-
-
-    private fun transformFullToPreview(listOfRecipes: List<Recipe>): List<RecipePreview> {
-        return listOfRecipes.map { recipe ->
-            RecipePreview(
-                recipe.recipeID,
-                recipe.name,
-                recipe.sourceUrl
-            )
         }
     }
 }

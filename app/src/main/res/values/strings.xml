@@ -8,4 +8,6 @@
     <string name="likes_desc">number of likes</string>
     <string name="health_score_desc">healthiness score</string>
     <string name="time_to_prepare_desc">time to prepare</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
