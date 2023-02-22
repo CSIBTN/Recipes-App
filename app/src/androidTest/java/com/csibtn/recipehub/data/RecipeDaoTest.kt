@@ -35,7 +35,7 @@ class RecipeDaoTest {
     }
 
     @Test
-    fun insertRecipe() {
+    fun insertRecipeAndGetRecipeById() =
         runTest(UnconfinedTestDispatcher()) {
             val recipe = Recipe(
                 1, "Pizza", "someUrl.com", 50.0, 100, 45, "recipes.com", "decent"
@@ -43,6 +43,19 @@ class RecipeDaoTest {
             dao.insertRecipe(recipe)
             assertThat(recipe).isEqualTo(dao.getRecipesById(recipe.recipeID))
         }
-    }
 
+    @Test
+    fun getAllRecipes() = runTest {
+
+        val recipe1 = Recipe(
+            1, "Pizza", "someUrl.com", 50.0, 100, 45, "recipes.com", "decent"
+        )
+        val recipe2 = Recipe(
+            2, "Hamburger", "someUrl2.com", 30.0, 200, 55, "recipes2.com", "really good"
+        )
+        dao.insertRecipe(recipe1)
+        dao.insertRecipe(recipe2)
+        val receivedRecipes = dao.getRecipes();
+        assertThat(receivedRecipes).containsAtLeastElementsIn(arrayOf(recipe1, recipe2))
+    }
 }

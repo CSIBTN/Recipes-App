@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/recipeBrowserFragment">
 
     <fragment
         android:id="@+id/recipeBrowserFragment"
         android:name="com.csibtn.recipehub.ui.RecipeBrowserFragment"
-        android:label="RecipeBrowserFragment" >
+        android:label="RecipeBrowserFragment">
         <action
             android:id="@+id/showRecipeDetails"
             app:destination="@id/recipeDetailsFragment" />
@@ -22,7 +21,7 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.csibtn.recipehub.ui.RecipeDetailsFragment"
-        android:label="RecipeDetailsFragment" >
+        android:label="RecipeDetailsFragment">
         <argument
             android:name="recipe"
             app:argType="com.csibtn.recipehub.data.model.Recipe" />
@@ -30,7 +29,7 @@
     <fragment
         android:id="@+id/savedFragment"
         android:name="com.csibtn.recipehub.ui.SavedFragment"
-        android:label="SavedFragment" >
+        android:label="SavedFragment">
         <action
             android:id="@+id/showRecipeDetails"
             app:destination="@id/recipeDetailsFragment" />
