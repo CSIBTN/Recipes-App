@@ -3,7 +3,7 @@ package com.csibtn.recipehub.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+import com.csibtn.recipehub.data.model.Recipe
 
 @Dao
 interface RecipeDao {

@@ -1,8 +1,8 @@
-package com.csibtn.recipehub.ui
+package com.csibtn.recipehub.ui.viewmodels
 
-import com.csibtn.recipehub.data.Recipe
-import com.csibtn.recipehub.data.RecipeDatabaseRepository
-import com.csibtn.recipehub.data.RecipePreview
+import com.csibtn.recipehub.data.model.Recipe
+import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
+import com.csibtn.recipehub.data.model.RecipePreview
 
 class SavedRecipesViewModel : RecipeBrowserViewModel() {
     override suspend fun getRecipeById(id: Int): Recipe = RecipeDatabaseRepository.getRecipeById(id)

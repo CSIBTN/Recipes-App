@@ -1,4 +1,4 @@
-package com.csibtn.recipehub.data
+package com.csibtn.recipehub.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

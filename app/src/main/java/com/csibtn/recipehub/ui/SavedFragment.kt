@@ -11,8 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.csibtn.recipehub.data.RecipeDatabaseRepository
+import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentSavedRecipesBinding
+import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
+import com.csibtn.recipehub.ui.viewmodels.SavedRecipesViewModel
 import kotlinx.coroutines.launch
 
 class SavedFragment : Fragment() {

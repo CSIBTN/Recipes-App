@@ -1,6 +1,8 @@
-package com.csibtn.recipehub.data
+package com.csibtn.recipehub.data.repositories
 
 import androidx.room.Room
+import com.csibtn.recipehub.data.model.Recipe
+import com.csibtn.recipehub.data.RecipeDatabase
 import com.csibtn.recipehub.util.Constants
 import com.csibtn.recipehub.util.RecipeApplication
 

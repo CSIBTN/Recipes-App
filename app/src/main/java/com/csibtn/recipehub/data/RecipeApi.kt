@@ -1,5 +1,7 @@
 package com.csibtn.recipehub.data
 
+import com.csibtn.recipehub.data.model.Recipe
+import com.csibtn.recipehub.data.model.RecipeResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

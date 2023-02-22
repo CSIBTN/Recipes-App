@@ -1,11 +1,11 @@
-package com.csibtn.recipehub.ui
+package com.csibtn.recipehub.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.csibtn.recipehub.data.Recipe
-import com.csibtn.recipehub.data.RecipeDatabaseRepository
-import com.csibtn.recipehub.data.RecipePreview
-import com.csibtn.recipehub.data.RemoteRecipeRepository
+import com.csibtn.recipehub.data.model.Recipe
+import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
+import com.csibtn.recipehub.data.model.RecipePreview
+import com.csibtn.recipehub.data.repositories.RemoteRecipeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

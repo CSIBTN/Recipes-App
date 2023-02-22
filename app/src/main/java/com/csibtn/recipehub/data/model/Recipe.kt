@@ -1,4 +1,4 @@
-package com.csibtn.recipehub.data
+package com.csibtn.recipehub.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity

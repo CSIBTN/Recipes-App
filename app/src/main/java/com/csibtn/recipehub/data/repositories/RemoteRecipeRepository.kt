@@ -1,5 +1,8 @@
-package com.csibtn.recipehub.data
+package com.csibtn.recipehub.data.repositories
 
+import com.csibtn.recipehub.data.model.Recipe
+import com.csibtn.recipehub.data.RecipeApi
+import com.csibtn.recipehub.data.model.RecipePreview
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create

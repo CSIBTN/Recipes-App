@@ -25,7 +25,7 @@
         android:label="RecipeDetailsFragment" >
         <argument
             android:name="recipe"
-            app:argType="com.csibtn.recipehub.data.Recipe" />
+            app:argType="com.csibtn.recipehub.data.model.Recipe" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
