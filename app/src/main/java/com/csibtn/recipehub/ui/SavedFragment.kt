@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.csibtn.recipehub.data.model.RecipePreview
 import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentSavedRecipesBinding
 import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
@@ -39,13 +40,21 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val savedRecipes = savedViewModel.getSavedRecipes()
-                savedFragmentBinding.savedRecipesRecycler.adapter = RecipeBrowserAdapter(
-                    savedRecipes,
-                    requireContext(),
-                    showDetails(),
-                    saveRecipe()
-                )
+                val savedRecipesFlow = savedViewModel.getSavedRecipes()
+                savedRecipesFlow.collect { savedRecipes ->
+                    savedFragmentBinding.savedRecipesRecycler.adapter = RecipeBrowserAdapter(
+                        savedRecipes.map { recipe ->
+                            RecipePreview(
+                                recipe.recipeID,
+                                recipe.name,
+                                recipe.image
+                            )
+                        },
+                        requireContext(),
+                        showDetails(),
+                        saveRecipe()
+                    )
+                }
             }
         }
     }

@@ -52,11 +52,13 @@ class RecipeBrowserFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = recipeViewModel.getRecipeById(recipeId)
-                findNavController().navigate(
-                    RecipeBrowserFragmentDirections.showRecipeDetails(
-                        recipe
+                if (recipe != null) {
+                    findNavController().navigate(
+                        RecipeBrowserFragmentDirections.showRecipeDetails(
+                            recipe
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -65,7 +67,9 @@ class RecipeBrowserFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = recipeViewModel.getRecipeById(recipeId)
-                RecipeDatabaseRepository.addRecipe(recipe)
+                if (recipe != null) {
+                    RecipeDatabaseRepository.addRecipe(recipe)
+                }
             }
         }
     }

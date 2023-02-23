@@ -16,7 +16,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String", "API_KEY", API_KEY)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+    androidTestImplementation 'app.cash.turbine:turbine:0.12.1'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'

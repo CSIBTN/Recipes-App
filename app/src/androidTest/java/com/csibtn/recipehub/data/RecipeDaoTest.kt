@@ -4,9 +4,11 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import app.cash.turbine.test
 import com.csibtn.recipehub.data.model.Recipe
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -45,7 +47,7 @@ class RecipeDaoTest {
         }
 
     @Test
-    fun getAllRecipes() = runTest {
+    fun getAllRecipes() = runTest(StandardTestDispatcher()) {
 
         val recipe1 = Recipe(
             1, "Pizza", "someUrl.com", 50.0, 100, 45, "recipes.com", "decent"
@@ -55,7 +57,9 @@ class RecipeDaoTest {
         )
         dao.insertRecipe(recipe1)
         dao.insertRecipe(recipe2)
-        val receivedRecipes = dao.getRecipes();
-        assertThat(receivedRecipes).containsAtLeastElementsIn(arrayOf(recipe1, recipe2))
+        dao.getRecipes().test {
+            val recipesList = awaitItem()
+            assertThat(recipesList).containsAtLeastElementsIn(arrayOf(recipe1, recipe2))
+        }
     }
 }

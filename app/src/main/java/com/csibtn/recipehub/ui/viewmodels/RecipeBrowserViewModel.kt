@@ -3,7 +3,6 @@ package com.csibtn.recipehub.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csibtn.recipehub.data.model.Recipe
-import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.data.model.RecipePreview
 import com.csibtn.recipehub.data.repositories.RemoteRecipeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,14 +22,10 @@ open class RecipeBrowserViewModel : ViewModel() {
         }
     }
 
-   open suspend fun getRecipeById(id: Int): Recipe = recipeBrowserRepository.getRecipeById(id)
+    open suspend fun getRecipeById(id: Int): Recipe? =
+        recipeBrowserRepository.getRecipeById(id).data?.let { return@let it }
 
-    private suspend fun getRecipesWithTitle(title: String): List<RecipePreview> {
-        return if (title.isNotEmpty()) {
-            recipeBrowserRepository.getRecipesWithTitle(title)
-        } else {
-            RecipeDatabaseRepository.getBookmarkedRecipes()
-                .map { recipe -> RecipePreview(recipe.recipeID, recipe.name, recipe.sourceUrl) }
-        }
-    }
+    private suspend fun getRecipesWithTitle(title: String): List<RecipePreview> =
+        recipeBrowserRepository.getRecipesWithTitle(title).data
+
 }
