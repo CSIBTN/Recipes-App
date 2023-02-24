@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
-class RecipeDaoTest {
+internal class RecipeDaoTest {
     private lateinit var database: RecipeDatabase
     private lateinit var dao: RecipeDao
 

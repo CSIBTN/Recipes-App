@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentRecipeBrowserBinding
 import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
 import com.csibtn.recipehub.ui.viewmodels.RecipeBrowserViewModel
@@ -68,7 +67,7 @@ class RecipeBrowserFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = recipeViewModel.getRecipeById(recipeId)
                 if (recipe != null) {
-                    RecipeDatabaseRepository.addRecipe(recipe)
+                    recipeViewModel.addRecipe(recipe)
                 }
             }
         }

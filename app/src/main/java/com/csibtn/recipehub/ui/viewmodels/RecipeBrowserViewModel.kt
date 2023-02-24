@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csibtn.recipehub.data.model.Recipe
 import com.csibtn.recipehub.data.model.RecipePreview
+import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.data.repositories.RemoteRecipeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,5 +28,8 @@ open class RecipeBrowserViewModel : ViewModel() {
 
     private suspend fun getRecipesWithTitle(title: String): List<RecipePreview> =
         recipeBrowserRepository.getRecipesWithTitle(title).data
+
+    suspend fun addRecipe(recipe: Recipe) = RecipeDatabaseRepository.addRecipe(recipe)
+
 
 }
