@@ -2,6 +2,7 @@ package com.csibtn.recipehub.util
 
 import android.app.Application
 import android.content.Context
+import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 
 class RecipeApplication : Application() {
 

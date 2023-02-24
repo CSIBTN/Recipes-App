@@ -9,11 +9,16 @@ import kotlinx.coroutines.flow.Flow
 
 object RecipeDatabaseRepository : RecipeDatabaseRepositoryInterface {
 
-    private val recipeDatabase: RecipeDatabase = Room.databaseBuilder(
-        RecipeApplication.applicationContext().applicationContext,
-        RecipeDatabase::class.java,
-        Constants.databaseName
-    ).build()
+    private val recipeDatabase: RecipeDatabase
+
+    init {
+        recipeDatabase = Room.databaseBuilder(
+            RecipeApplication.applicationContext().applicationContext,
+            RecipeDatabase::class.java,
+            Constants.databaseName
+        ).build()
+    }
+
 
     override suspend fun removeRecipe(recipe: Recipe) =
         recipeDatabase.recipeDao().deleteRecipe(recipe)
@@ -24,4 +29,6 @@ object RecipeDatabaseRepository : RecipeDatabaseRepositoryInterface {
         recipeDatabase.recipeDao().getRecipes()
 
     override suspend fun addRecipe(recipe: Recipe) = recipeDatabase.recipeDao().insertRecipe(recipe)
+
+    suspend fun deleteAll() = recipeDatabase.recipeDao().deleteAll()
 }

@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     androidTestImplementation "androidx.fragment:fragment-testing:1.5.5"
     androidTestImplementation "org.mockito:mockito-core:5.+"
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"

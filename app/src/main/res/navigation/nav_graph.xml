@@ -10,13 +10,11 @@
         android:label="RecipeBrowserFragment">
         <action
             android:id="@+id/showRecipeDetails"
-            app:destination="@id/recipeDetailsFragment" />
-        <action
-            android:id="@+id/showSavedRecipes"
-            app:destination="@id/savedFragment" />
-        <action
-            android:id="@+id/openSearch"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/recipeDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
@@ -37,6 +35,10 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.csibtn.recipehub.ui.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment">
+        <action
+            android:id="@+id/showRecipeDetails"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
 
 </navigation>

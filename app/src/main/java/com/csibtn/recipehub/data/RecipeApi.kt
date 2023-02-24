@@ -15,4 +15,5 @@ interface RecipeApi {
 
     @GET("recipes/{id}/information?apiKey=${BuildConfig.API_KEY}")
     suspend fun fetchRecipeById(@Path("id") id: Int): Recipe
+    
 }
