@@ -1,7 +1,6 @@
 package com.csibtn.recipehub.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,12 +74,18 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun saveRecipe(): (id: Int) -> Unit = { recipeId ->
+    private fun saveRecipe(): (id: Int, actionChoice: Boolean) -> Unit = { recipeId, actionChoice ->
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = recipeViewModel.getRecipeById(recipeId)
-                if (recipe != null) {
-                    recipeViewModel.addRecipe(recipe)
+                if (actionChoice) {
+                    recipe?.let {
+                        recipeViewModel.deleteRecipe(it)
+                    }
+                } else {
+                    recipe?.let {
+                        recipeViewModel.addRecipe(it)
+                    }
                 }
             }
         }

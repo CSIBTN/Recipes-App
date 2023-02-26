@@ -10,6 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_margin="4dp"
         android:orientation="horizontal"
         android:theme="@style/Theme.RecipeHub"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,10 +34,10 @@
                 android:layout_height="match_parent"
                 android:drawablePadding="2dp"
                 android:gravity="center_vertical"
+                android:hint="@string/search_bar_placeholder"
                 android:imeOptions="actionSearch"
                 android:padding="5dp"
                 android:singleLine="true"
-                android:text="@string/search_bar_placeholder"
                 app:drawableLeftCompat="@drawable/ic_search" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

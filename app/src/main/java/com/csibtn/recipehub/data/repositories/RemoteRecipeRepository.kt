@@ -1,8 +1,11 @@
 package com.csibtn.recipehub.data.repositories
 
+import android.util.Log
+import android.widget.Toast
 import com.csibtn.recipehub.data.RecipeApi
 import com.csibtn.recipehub.data.model.Recipe
 import com.csibtn.recipehub.data.model.RecipePreview
+import com.csibtn.recipehub.util.RecipeApplication
 import com.csibtn.recipehub.util.Resource
 import com.csibtn.recipehub.util.Status
 import retrofit2.Retrofit
@@ -22,6 +25,11 @@ object RemoteRecipeRepository : RemoteRecipeRepositoryInterface {
         val recipes = recipeApi.fetchRecipes(title).recipePreviews
         Resource(Status.SUCCESS, recipes, "SUCCESS")
     } catch (e: Exception) {
+        Toast.makeText(
+            RecipeApplication.applicationContext(),
+            "Failed to retrieve recipes, check your Internet connection",
+            Toast.LENGTH_SHORT
+        ).show()
         Resource(
             Status.ERROR, emptyList(), "Failed to retrieve recipes, check your Internet connection"
         )

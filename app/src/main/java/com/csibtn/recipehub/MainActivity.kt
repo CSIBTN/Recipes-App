@@ -1,8 +1,7 @@
-
 package com.csibtn.recipehub
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -26,8 +25,11 @@ class MainActivity : AppCompatActivity() {
             NavigationUI.setupWithNavController(_mainBinding.bottomNavBar, navController)
         }
 
-        _mainBinding.searchBar.setOnClickListener {
-            navController?.navigate(R.id.searchFragment)
+        _mainBinding.searchBar.also {
+            it.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 ->
+                if (p1)
+                    navController?.navigate(R.id.searchFragment)
+            }
         }
 
     }

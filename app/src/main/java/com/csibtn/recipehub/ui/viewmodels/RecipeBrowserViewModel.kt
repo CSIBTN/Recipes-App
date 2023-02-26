@@ -1,6 +1,5 @@
 package com.csibtn.recipehub.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.csibtn.recipehub.data.model.Recipe
@@ -39,6 +38,8 @@ open class RecipeBrowserViewModel : ViewModel() {
         RemoteRecipeRepository.getRecipesWithTitle(title).data
 
     suspend fun addRecipe(recipe: Recipe) = RecipeDatabaseRepository.addRecipe(recipe)
+
+    suspend fun deleteRecipe(recipe: Recipe) = RecipeDatabaseRepository.removeRecipe(recipe)
 
 
 }

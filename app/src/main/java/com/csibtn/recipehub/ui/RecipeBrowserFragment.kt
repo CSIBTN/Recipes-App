@@ -1,11 +1,9 @@
 package com.csibtn.recipehub.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentRecipeBrowserBinding
 import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
 import com.csibtn.recipehub.ui.viewmodels.RecipeBrowserViewModel
@@ -43,7 +40,6 @@ class RecipeBrowserFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                RecipeDatabaseRepository.deleteAll()
                 recipeViewModel.recipes.collect { recipes ->
                     recipeBrowserBinding.recipeRecycler.adapter =
                         RecipeBrowserAdapter(recipes, requireContext(), showDetails(), saveRecipe())
@@ -52,20 +48,6 @@ class RecipeBrowserFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        val callback = object : OnBackPressedCallback(
-            true // default to enabled
-        ) {
-            override fun handleOnBackPressed() {
-                requireActivity().supportFragmentManager.popBackStack()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            this, // LifecycleOwner
-            callback
-        )
-    }
 
     private fun showDetails(): (id: Int) -> Unit = { recipeId ->
         viewLifecycleOwner.lifecycleScope.launch {
@@ -82,12 +64,18 @@ class RecipeBrowserFragment : Fragment() {
         }
     }
 
-    private fun saveRecipe(): (id: Int) -> Unit = { recipeId ->
+    private fun saveRecipe(): (id: Int, actionChoice: Boolean) -> Unit = { recipeId, actionChoice ->
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = recipeViewModel.getRecipeById(recipeId)
-                if (recipe != null) {
-                    recipeViewModel.addRecipe(recipe)
+                if (actionChoice) {
+                    recipe?.let {
+                        recipeViewModel.deleteRecipe(it)
+                    }
+                } else {
+                    recipe?.let {
+                        recipeViewModel.addRecipe(it)
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.csibtn.recipehub.R
@@ -13,8 +14,8 @@ import com.csibtn.recipehub.databinding.RecipeItemBinding
 class RecipeBrowserAdapter(
     private val recipePreviewList: List<RecipePreview>,
     private val context: Context,
-    private val onClickCallback: (id : Int) -> Unit,
-    private val onSaveCallback: (id: Int) -> Unit,
+    private val onClickCallback: (id: Int) -> Unit,
+    private val onSaveCallback: (id: Int, actionChoice: Boolean) -> Unit,
 ) :
     RecyclerView.Adapter<RecipeBrowserAdapter.RecipeHolder>() {
     inner class RecipeHolder(
@@ -23,7 +24,9 @@ class RecipeBrowserAdapter(
         RecyclerView.ViewHolder(recipeBinding.root) {
         fun bind(recipePreview: RecipePreview) {
             recipeBinding.recipeName.text = recipePreview.name
-            Glide.with(context).load(recipePreview.imageURL).into(recipeBinding.recipePreviewIV)
+            Glide.with(context).load(recipePreview.imageURL)
+                .placeholder(R.drawable.recipe_placeholder)
+                .into(recipeBinding.recipePreviewIV)
             recipeBinding.ivBookmark.setOnClickListener {
                 Log.d("Icon", "Clicked!")
                 recipeBinding.ivBookmark.setImageResource(R.drawable.ic_bookmark_clicked)
@@ -31,8 +34,20 @@ class RecipeBrowserAdapter(
             recipeBinding.root.setOnClickListener {
                 onClickCallback(recipePreview.recipeId)
             }
-            recipeBinding.ivBookmark.setOnClickListener{
-                onSaveCallback(recipePreview.recipeId)
+            recipeBinding.ivBookmark.setOnClickListener {
+                if (recipePreview.isClicked) {
+                    onSaveCallback(recipePreview.recipeId, true)
+                    recipeBinding.ivBookmark.setImageDrawable(
+                        AppCompatResources.getDrawable(context, R.drawable.ic_bookmark)
+                    )
+                    recipePreview.isClicked = false
+                } else {
+                    recipeBinding.ivBookmark.setImageDrawable(
+                        AppCompatResources.getDrawable(context, R.drawable.ic_bookmark_clicked)
+                    )
+                    onSaveCallback(recipePreview.recipeId, false)
+                    recipePreview.isClicked = true
+                }
             }
         }
     }

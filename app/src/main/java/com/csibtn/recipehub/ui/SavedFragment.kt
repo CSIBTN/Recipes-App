@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.csibtn.recipehub.data.model.RecipePreview
-import com.csibtn.recipehub.data.repositories.RecipeDatabaseRepository
 import com.csibtn.recipehub.databinding.FragmentSavedRecipesBinding
 import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
 import com.csibtn.recipehub.ui.viewmodels.SavedRecipesViewModel
@@ -73,11 +72,16 @@ class SavedFragment : Fragment() {
         }
     }
 
-    private fun saveRecipe(): (id: Int) -> Unit = { recipeId ->
+    private fun saveRecipe(): (id: Int, actionChoice: Boolean) -> Unit = { recipeId, actionChoice ->
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val recipe = savedViewModel.getRecipeById(recipeId)
-                RecipeDatabaseRepository.addRecipe(recipe)
+                if (actionChoice) {
+                    savedViewModel.deleteRecipe(recipe)
+
+                } else {
+                    savedViewModel.addRecipe(recipe)
+                }
             }
         }
     }
