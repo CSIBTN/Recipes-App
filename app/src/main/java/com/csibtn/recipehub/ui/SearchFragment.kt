@@ -1,9 +1,11 @@
 package com.csibtn.recipehub.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -38,6 +40,10 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().findViewById<TextInputEditText>(R.id.search_bar)
             .setOnEditorActionListener { textView, _, _ ->
+                val inputManager =
+                    activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(textView.windowToken, 0)
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                         recipeViewModel.setQuery(textView.text.toString())
