@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.csibtn.recipehub.MainActivity
 import com.csibtn.recipehub.databinding.FragmentRecipeBrowserBinding
 import com.csibtn.recipehub.ui.adapters.RecipeBrowserAdapter
 import com.csibtn.recipehub.ui.viewmodels.RecipeBrowserViewModel
@@ -35,7 +36,6 @@ class RecipeBrowserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         recipeBrowserBinding.recipeRecycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewLifecycleOwner.lifecycleScope.launch {

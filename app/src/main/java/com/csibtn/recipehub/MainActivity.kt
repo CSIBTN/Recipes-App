@@ -1,7 +1,10 @@
 package com.csibtn.recipehub
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
@@ -26,11 +29,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         _mainBinding.searchBar.also {
-            it.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 ->
-                if (p1)
-                    navController?.navigate(R.id.searchFragment)
+            it.onFocusChangeListener = View.OnFocusChangeListener { view, _ ->
+                navController?.navigate(R.id.searchFragment)
             }
         }
 
     }
+
 }
